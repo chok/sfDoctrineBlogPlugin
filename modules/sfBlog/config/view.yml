@@ -1,0 +1,8 @@
+all:
+  components:
+    sidebar_right: [sfBlog, pub]
+    sidebar_left: [sfBlog, archives]
+    
+  stylesheets: 
+    - blog/blog
+    - blog/global

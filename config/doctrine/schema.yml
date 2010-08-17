@@ -1,0 +1,76 @@
+Post:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    user_id: integer(4)
+    title:   string(255)
+    content: clob(4096)
+    is_publish: boolean
+  relations:
+    Comments:
+      type: many
+      class: Comment
+      local: id
+      foreign: post_id
+    user:
+      class: sfGuardUser
+      local: user_id
+      foreign: id
+      foreignAlias: Posts
+  actAs:
+    Timestampable: ~
+    Sluggable:
+      unique: true
+      fields: [title]
+      canUpdate: true
+    
+  
+    
+  
+
+Comment:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    post_id: integer(4)
+    user_id: integer(4)
+    title: string(255)
+    content: clob(4096)
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreign: id
+      foreignAlias: comments
+    Post:
+      class: Post
+      local: post_id
+      foreign: id
+      foreignAlias: comments
+  actAs:
+    Timestampable: ~
+    
+Alert:
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    post_id: integer(4)
+    user_id: integer(4)
+    mail:  varchar(255)
+    active: boolean
+  relations:
+    post:
+      class: Post
+      local: post_id
+      foreign: id
+    user:
+      class: sfGuardUser
+      local: user_id
+      foreign: id
+      foreignAlias: Alerts
