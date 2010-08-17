@@ -14,8 +14,6 @@ class sfBlogActions extends sfActions
 
       $title .= ' - '.$month.' '.$year;
     }
-
-    Meta::setMeta($this->getResponse(),$title);
   }
 
   public function executeViewPost(sfWebRequest $request)
@@ -25,8 +23,6 @@ class sfBlogActions extends sfActions
     $this->forward404Unless($this->post);
 
     $this->comment_form = new CommentForm();
-
-    Meta::setMeta($this->getResponse(),'Blog - '.$this->post->getTitle());
   }
 
   public function executeSendComment(sfWebRequest $request)

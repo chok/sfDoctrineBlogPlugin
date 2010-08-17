@@ -1,0 +1,25 @@
+#blog
+blog_archive:
+  url: /blog/archive/:archive
+  param: { module: sfBlog, action: index }
+  
+blog_index:
+  url: /blog
+  param: { module: sfBlog, action: index }
+  
+blog_view:
+  url: /blog/billet/:slug
+  param: { module: sfBlog, action: viewPost }
+  
+blog_comment:
+  url: /blog/commentaire/nouveau
+  param: { module: sfBlog, action: sendComment }
+  
+blog_admin:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Post
+    module:               sfBlogAdmin
+    prefix_path:          /blog
+    column:               id
+    with_wildcard_routes: true

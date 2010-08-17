@@ -14,19 +14,24 @@ abstract class PluginPostForm extends BasePostForm
   {
     parent::setup();
 
-    $this->widgetSchema['content'] = new sfWidgetFormTextareaTinyMCE(array(
-                                                                            'width'  => 550,
-                                                                            'height' => 350,
-                                                                            //'config' => 'theme_advanced_disable: "anchor,image,cleanup,help"',
-                                                                          ));
+    if(class_exists('sfWidgetFormTextareaTinyMCE'))
+    {
+      $this->widgetSchema['content'] = new sfWidgetFormTextareaTinyMCE(array(
+                                                                              'width'  => 550,
+                                                                              'height' => 350,
+                                                                              //'config' => 'theme_advanced_disable: "anchor,image,cleanup,help"',
+                                                                            ));
+    }
 
 
-    $this->widgetSchema['created_at'] = new sfWidgetFormJQueryDate();
-    $this->widgetSchema['updated_at'] = new sfWidgetFormJQueryDate();
+    if(class_exists('sfWidgetFormJQueryDate'))
+    {
+      $this->widgetSchema['created_at'] = new sfWidgetFormJQueryDate();
+      $this->widgetSchema['updated_at'] = new sfWidgetFormJQueryDate();
 
-    $this->validatorSchema['created_at'] = new sfValidatorDateTime(array('required' => false));
-    $this->validatorSchema['updated_at'] = new sfValidatorDateTime(array('required' => false));
-
+      $this->validatorSchema['created_at'] = new sfValidatorDateTime(array('required' => false));
+      $this->validatorSchema['updated_at'] = new sfValidatorDateTime(array('required' => false));
+    }
   }
 
   public function configure()
