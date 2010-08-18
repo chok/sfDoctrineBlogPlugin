@@ -1,6 +1,14 @@
 <?php
 class sfBlogActions extends sfActions
 {
+  public function preExecute()
+  {
+    if($layout = sfConfig::get('app_sfBlog_layout'))
+    {
+      $this->setLayout($layout);
+    }
+  }
+
   public function executeIndex(sfWebRequest $request)
   {
     $this->pager = new PostPager($request->getParameter('page',1),$request->getParameter('archive'));
