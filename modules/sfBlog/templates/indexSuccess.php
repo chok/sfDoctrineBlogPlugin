@@ -1,5 +1,3 @@
-<?php include_partial('slot') ?>
-
 <?php if(!is_null($pager) && $pager->getNbResults() > 0 ): ?>
   <?php foreach($pager->getResults() as $post): ?>
     <?php include_partial('sfBlog/post',array('post' => $post,'view' => 'blog')) ?>
