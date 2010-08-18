@@ -2,7 +2,7 @@
   <div class="blog_title blue-link">
     <?php echo link_to($post->getTitle(),'sfBlog/viewPost?slug='.$post->getSlug()) ?>
   </div>
-  <div class="blog_post_date">publié par <?php echo link_to($post->getUser()->getUsername(),'account/index?slug='.$post->getUser()->getSlug()) ?>, <span>le <?php echo $post->getDate() ?></span></div>
+  <div class="blog_post_date">publié par <?php echo link_to($post->getUser()->getUsername(),'account/index?slug='.$post->getUser()->getUsername()) ?>, <span>le <?php echo $post->getDate() ?></span></div>
   <div class="blog_post_content corner"><?php echo $post->getRawValue()->getContent() ?></div>
   <div id="comments">
     <?php $plural = $post->getComments()->count() > 1?'s':'' ?>
@@ -18,7 +18,7 @@
     <?php endif; ?>
   </div>
   <?php if($view == 'full'): ?>
-    <?php if($sf_user->isAuthenticated()): ?>
+    <?php if($sf_user->isAuthenticated() || !sfConfig::get('app_sfBlog_register_for_comments')): ?>
     <?php echo form_tag('sfBlog/sendComment?slug='.$post->getSlug(),array('id' => 'blog_post_form'))?>
       <?php echo $comment_form['_csrf_token']->renderError() ?>
       <?php echo $comment_form['_csrf_token']->render() ?>

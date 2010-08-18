@@ -1,0 +1,3 @@
+all:
+  sfBlog:
+    register_for_comments: false

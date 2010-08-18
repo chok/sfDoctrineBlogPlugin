@@ -20,6 +20,6 @@ blog_admin:
   options:
     model:                Post
     module:               sfBlogAdmin
-    prefix_path:          /blog
+    prefix_path:          /post
     column:               id
     with_wildcard_routes: true

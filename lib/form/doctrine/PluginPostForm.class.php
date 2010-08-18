@@ -38,4 +38,24 @@ abstract class PluginPostForm extends BasePostForm
   {
 
   }
+
+  public function getJavascripts()
+  {
+    if(class_exists('sfWidgetFormTextareaTinyMCE') || class_exists('sfWidgetFormJQueryDate'))
+    {
+      return array('jquery/jquery', 'jquery/jquery.ui.js', 'tiny_mce/tiny_mce');
+    }
+
+    return array();
+  }
+
+  public function getStylesheets()
+  {
+    if(class_exists('sfWidgetFormTextareaTinyMCE') || class_exists('sfWidgetFormJQueryDate'))
+    {
+      return array('jquery/ui/jquery.ui.css' => 'all');
+    }
+
+    return array();
+  }
 }

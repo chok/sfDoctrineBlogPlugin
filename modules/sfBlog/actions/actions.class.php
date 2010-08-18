@@ -29,9 +29,10 @@ class sfBlogActions extends sfActions
   {
     $this->post = Doctrine::getTable('Post')->findOneBySlug($request->getParameter('slug'));
 
-    $this->forward404Unless($this->post && $this->getUser()->isAuthenticated());
+    $this->forward404Unless($this->post && ($this->getUser()->isAuthenticated() || !sfConfig::get('app_sfBlog_register_for_comments')));
 
-    $this->form = new CommentForm($this->post,$this->getUser()->getGuardUser());
+    $user = sfConfig::get('app_sfBlog_register_for_comments')?$this->getUser()->getGuardUser():null;
+    $this->form = new CommentForm($this->post, $user);
 
     if($this->form->bindAndSave($request->getParameter('comment')))
     {

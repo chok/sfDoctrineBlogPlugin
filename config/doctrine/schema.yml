@@ -74,3 +74,55 @@ Alert:
       local: user_id
       foreign: id
       foreignAlias: Alerts
+      
+PostCategory:
+  columns:
+    id: 
+      type: integer
+      primary: true
+      autoincrement: true
+    category_id: integer
+    post_id: integer
+  relations:
+    Post:
+      class: Post
+      type: one
+      foreignType: many
+      local: post_id
+      foreign: id
+      foreignAlias: PostCategories
+    Category:
+      class: Category
+      type: one
+      foreignType: many
+      local: category_id
+      foreign: id
+      foreignAlias: PostCategories
+      
+    
+      
+Category:
+  columns:
+    id: 
+      type: integer
+      primary: true
+      autoincrement: true
+    name: string(255)
+  relations:
+    Posts:
+      class: Post
+      refClass: PostCategory
+      type: many
+      foreignType: many
+      local: category_id
+      foreign: post_id
+      foreignAlias: Categories
+  actAs:
+    NestedSet:
+      hasManyRoots: true
+      rootColumnName: root_id
+    Sluggable:
+      unique: true
+      fields: [name]
+      canUpdate: true
+    
