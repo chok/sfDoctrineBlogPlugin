@@ -30,6 +30,11 @@ abstract class PluginCommentForm extends BaseCommentForm
       'title'   => 'Titre'
       ));
 
+    if($this->user)
+    {
+      unset($this['username']);
+    }
+
     unset($this['created_at'], $this['updated_at']);
   }
 
@@ -37,8 +42,12 @@ abstract class PluginCommentForm extends BaseCommentForm
   {
     parent::doUpdateObject($values);
 
-    $this->object->setUser($this->user);
-    $this->object->setPostId($this->post->getId());
+    if($this->user)
+    {
+      $this->object->setUser($this->user);
+      $this->object->setUsername($this->user->getUsername());
+    }
 
+    $this->object->setPostId($this->post->getId());
   }
 }

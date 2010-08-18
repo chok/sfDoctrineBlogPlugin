@@ -6,6 +6,7 @@ Post:
       autoincrement: true
     user_id: integer
     title:   string(255)
+    username: string(255)
     content: clob(4096)
     is_publish: boolean
   relations:
@@ -38,6 +39,7 @@ Comment:
       autoincrement: true
     post_id: integer
     user_id: integer
+    username: string(255)
     title: string(255)
     content: clob(4096)
   relations:
