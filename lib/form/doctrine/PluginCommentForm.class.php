@@ -25,9 +25,17 @@ abstract class PluginCommentForm extends BaseCommentForm
   {
     parent::setup();
 
+    $this->validatorSchema['username']->setOption('required', true);
+    $this->validatorSchema['mail'] = new sfValidatorEmail(array('required' => true));
+    $this->validatorSchema['website'] = new sfValidatorUrl(array('required' => false));
+    $this->validatorSchema['content']->setOption('required', true);
+
     $this->widgetSchema->setLabels(array(
       'content' => 'Message',
-      'title'   => 'Titre'
+      'title'   => 'Titre',
+      'username' => 'Name (required)',
+      'mail'    => 'Mail (required not published)',
+      'website' => 'Website'
       ));
 
     if($this->user)

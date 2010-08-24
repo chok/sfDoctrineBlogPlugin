@@ -33,6 +33,21 @@ class PluginPostTable extends Doctrine_Table
                                   'decembre'  => 12
                                 );
 
+ public static $nb_month_en = array(
+                                  'january'   => 1,
+                                  'february'   => 2,
+                                  'march'      => 3,
+                                  'april'     => 4,
+                                  'may'       => 5,
+                                  'june'      => 6,
+                                  'july'   => 7,
+                                  'august'      => 8,
+                                  'september' => 9,
+                                  'october'   => 10,
+                                  'november'  => 11,
+                                  'december'  => 12
+                                );
+
 
   public function getPublishedPostQuery()
   {
@@ -66,7 +81,17 @@ class PluginPostTable extends Doctrine_Table
     return $q;
   }
 
-  public function getArchives($format = "month",$start = null, $end = null)
+  public function getCategoryQuery($category)
+  {
+    $q = $this->createQuery('p')
+              ->leftJoin('p.Categories c')
+              ->where('p.is_publish = 1')
+              ->addWhere('c.id = ?', $category->getId());
+
+    return $q;
+  }
+
+  public function getArchives($format = "month",$start = null, $end = null, $culture = 'en')
   {
     $q = $this->getArchivesQuery($format,$start,$end);
 
@@ -77,7 +102,11 @@ class PluginPostTable extends Doctrine_Table
     foreach($results as $result)
     {
       $dt = $result->getDateTimeObject('created_at');
-      $month = self::$fr_month[$dt->format('F')];
+      $month = $dt->format('F');
+      if($culture == 'fr')
+      {
+        $month = self::$fr_month[$month];
+      }
       $year = $dt->format('Y');
 
       $archives[$month.' '.$year][] = $result;

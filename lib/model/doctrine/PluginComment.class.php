@@ -12,13 +12,28 @@
  */
 abstract class PluginComment extends BaseComment
 {
-  public function getDate()
+  public function getDate($culture = 'en', $complete = true)
   {
     $dt = $this->getDateTimeObject('created_at');
     $day = $dt->format('d');
-    $month = PostTable::$fr_month[$dt->format('F')];
+    $month = $dt->format('F');
+
+    if($culture =='fr')
+    {
+      $month = PostTable::$fr_month[$month];
+    }
+
     $year = $dt->format('Y');
 
-    return $day.' '.$month.' '.$year;
+    $date = $day.' '.$month.' '.$year;
+
+    if($complete)
+    {
+      $hour = $dt->format('H');
+      $minuts = $dt->format('i');
+      $date .= ', '.$hour.' h '.$minuts;
+    }
+
+    return $date;
   }
 }

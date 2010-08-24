@@ -3,6 +3,10 @@ blog_archive:
   url: /blog/archive/:archive
   param: { module: sfBlog, action: index }
   
+blog_category:
+  url: /blog/category/:category
+  param: { module: sfBlog, action: index }
+  
 blog_index:
   url: /blog
   param: { module: sfBlog, action: index }
@@ -12,7 +16,7 @@ blog_view:
   param: { module: sfBlog, action: viewPost }
   
 blog_comment:
-  url: /blog/commentaire/nouveau
+  url: /blog/commentaire/nouveau/:slug
   param: { module: sfBlog, action: sendComment }
   
 blog_admin:

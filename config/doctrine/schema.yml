@@ -6,8 +6,7 @@ Post:
       autoincrement: true
     user_id: integer
     title:   string(255)
-    username: string(255)
-    content: clob(4096)
+    content: clob
     is_publish: boolean
   relations:
     Comments:
@@ -15,7 +14,7 @@ Post:
       class: Comment
       local: id
       foreign: post_id
-    user:
+    User:
       class: sfGuardUser
       local: user_id
       foreign: id
@@ -40,8 +39,13 @@ Comment:
     post_id: integer
     user_id: integer
     username: string(255)
+    mail: string(255)
+    website: string(255)
     title: string(255)
-    content: clob(4096)
+    content: clob
+    is_publish:
+      type: boolean
+      default: true
   relations:
     User:
       class: sfGuardUser
@@ -67,11 +71,11 @@ Alert:
     mail:  varchar(255)
     active: boolean
   relations:
-    post:
+    Post:
       class: Post
       local: post_id
       foreign: id
-    user:
+    User:
       class: sfGuardUser
       local: user_id
       foreign: id
