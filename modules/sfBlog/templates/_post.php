@@ -10,7 +10,7 @@
       <div id="comments-nb">
         <?php echo link_to('Comment'.$plural.'('.$post->getComments()->count().')','@blog_view?slug='.$post->getSlug()) ?>
       </div>
-    <?php else: ?>
+    <?php elseif($post->getComments()->count() > 0): ?>
       <div id="comments-title">Comments(<?php echo $post->getComments()->count() ?>)</div>
       <?php foreach($post->getComments() as $comment):?>
         <div class="comment">
