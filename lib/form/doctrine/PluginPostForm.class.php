@@ -19,7 +19,7 @@ abstract class PluginPostForm extends BasePostForm
       $this->widgetSchema['content'] = new sfWidgetFormTextareaTinyMCE(array(
                                                                               'width'  => 550,
                                                                               'height' => 350,
-                                                                              //'config' => 'theme_advanced_disable: "anchor,image,cleanup,help"',
+                                                                              'config' => 'plugins: "syntaxhl", theme_advanced_buttons4 : "syntaxhl"',
                                                                             ));
     }
 

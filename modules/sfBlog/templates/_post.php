@@ -1,3 +1,13 @@
+<?php use_stylesheet('/js/syntaxhl/styles/shCore.css') ?>
+<?php use_stylesheet('/js/syntaxhl/styles/shCoreDefault.css') ?>
+
+<?php use_javascript('syntaxhl/scripts/shCore.js') ?>
+<?php use_javascript('syntaxhl/scripts/shAutoloader.js') ?>
+
+
+<?php use_javascript('jquery/jquery.js') ?>
+<?php use_javascript('syntaxhl') ?>
+
 <div class="blog_post">
   <div class="blog_title blue-link">
     <?php echo link_to($post->getTitle(),'sfBlog/viewPost?slug='.$post->getSlug()) ?>
